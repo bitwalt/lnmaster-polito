@@ -30,7 +30,7 @@
 </head>
 <body>
   <h1>⚡ Lightning CLI Cheatsheet (Polar Lab)</h1>
-  <p>This cheatsheet provides quick reference commands for working with LND, CLN, Eclair, and Bitcoin Core inside a Polar Lightning Network simulation.</p>
+  <p>This cheatsheet provides quick reference commands for working with LND, CLN, and Bitcoin Core inside a Polar Lightning Network simulation.</p>
 
   <hr>
   <h2>🪙 Bitcoin Core (Funding Nodes)</h2>
@@ -110,29 +110,12 @@ lightning-cli fetchinvoice &lt;BOLT12_OFFER&gt;
 lightning-cli pay &lt;BOLT12_INVOICE&gt;</code></pre>
 
   <hr>
-  <h2>📲 Eclair Node (REST API)</h2>
-  <pre><code># List funds and channels
-curl -s localhost:8080/channel | jq
-
-# Get pubkey and node info
-curl -s localhost:8080/getinfo | jq -r '.nodeId'
-
-# Create invoice
-curl -X POST localhost:8080/createinvoice -d '{"amountMsat":100000,"description":"Test"}' | jq -r '.serialized'
-
-# Pay invoice
-curl -X POST localhost:8080/payinvoice -d '{"invoice":"&lt;BOLT11_STRING&gt;"}'</code></pre>
-
-  <hr>
   <h2>🛠 Debug / Network Management</h2>
   <pre><code># LND node info
 lncli getinfo
 
 # CLN node info
 lightning-cli getinfo
-
-# Eclair node info
-curl -s localhost:8080/getinfo | jq
 
 # Mine blocks (simulate confirmations)
 bitcoin-cli -regtest generatetoaddress 6 $(bitcoin-cli -regtest getnewaddress)</code></pre>

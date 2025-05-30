@@ -36,9 +36,9 @@
   <section>
     <h2>1. Channel Setup</h2>
     <ul>
-      <li>Create a Polar network with LND, two CLN nodes, and one Eclair node</li>
+      <li>Create a Polar network with LND and two CLN nodes</li>
       <li>Fund each node using <code>bitcoin-cli</code></li>
-      <li>Open channels: LND → CLN1 → CLN2 → Eclair</li>
+      <li>Open channels: LND → CLN1 → CLN2</li>
     </ul>
   </section>
 
@@ -74,16 +74,7 @@
   </section>
 
   <section>
-    <h2>5. Eclair REST API</h2>
-    <ul>
-      <li>Generate an invoice using <code>createinvoice</code></li>
-      <li>Pay it using LND or CLN</li>
-      <li>Check Eclair logs for route details</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>6. Network Graph Exploration</h2>
+    <h2>5. Network Graph Exploration</h2>
     <ul>
       <li>Use ThunderHub or RTL to visualize the graph</li>
       <li>Compare public vs. private channels</li>
@@ -92,7 +83,7 @@
   </section>
 
   <section>
-    <h2>7. Script Automation (Advanced)</h2>
+    <h2>6. Script Automation (Advanced)</h2>
     <ul>
       <li>Write a Bash or Python script to:
         <ul>
