@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lightning CLI Cheatsheet (Polar Lab)</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #f8f9fa;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    pre {
+      background-color: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+      border-left: 5px solid #888;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #ccc;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚡ Lightning CLI Cheatsheet (Polar Lab)</h1>
+  <p>This cheatsheet provides quick reference commands for working with LND, CLN, Eclair, and Bitcoin Core inside a Polar Lightning Network simulation.</p>
+
+  <hr>
+  <h2>🪙 Bitcoin Core (Funding Nodes)</h2>
+  <pre><code># Generate blocks to mature coinbase
+bitcoin-cli -regtest generatetoaddress 103 $(bitcoin-cli -regtest getnewaddress)
+
+# Send BTC to a Lightning node
+bitcoin-cli -regtest sendtoaddress &lt;NODE_ADDRESS&gt; 1</code></pre>
+
+  <hr>
+  <h2>🔐 LND Node (lncli)</h2>
+  <pre><code># Get on-chain address
+lncli newaddress p2wkh
+
+# Wallet balance
+lncli walletbalance
+
+# Node pubkey
+lncli getinfo | jq -r '.identity_pubkey'
+
+# Connect to peer
+lncli connect &lt;PUBKEY&gt;@&lt;IP&gt;
+
+# Open channel
+lncli openchannel --node_key=&lt;PUBKEY&gt; --local_amt=500000
+
+# List channel status
+lncli pendingchannels
+lncli listchannels
+
+# Update channel fees
+lncli updatechanpolicy --base_fee_msat=1000 --fee_rate=0.000001 --time_lock_delta=40
+
+# Create invoice
+lncli addinvoice --amt=100000 --memo="Test Payment"
+
+# Pay invoice
+lncli payinvoice &lt;BOLT11_STRING&gt;</code></pre>
+
+  <hr>
+  <h2>⚙️ Core Lightning (CLN - lightning-cli)</h2>
+  <pre><code># Get on-chain address
+lightning-cli newaddr
+
+# List wallet funds
+lightning-cli listfunds
+
+# Get node pubkey
+lightning-cli getinfo | jq -r '.id'
+
+# Connect to peer
+lightning-cli connect &lt;PUBKEY&gt; &lt;IP&gt; &lt;PORT&gt;
+
+# Open channel
+lightning-cli fundchannel &lt;PUBKEY&gt; 500000
+
+# List peers and channels
+lightning-cli listpeers
+lightning-cli listchannels
+
+# Update channel fees
+lightning-cli setchannelfee id=&lt;CHANNEL_ID&gt; base=1000 ppm=1
+
+# Create Bolt11 invoice
+lightning-cli invoice 100000 "label" "desc"
+
+# Pay invoice
+lightning-cli pay &lt;BOLT11_STRING&gt;
+
+# Create Bolt12 offer
+lightning-cli offer 100000 "Bolt12 Test"
+
+# Fetch invoice from offer
+lightning-cli fetchinvoice &lt;BOLT12_OFFER&gt;
+
+# Pay fetched invoice
+lightning-cli pay &lt;BOLT12_INVOICE&gt;</code></pre>
+
+  <hr>
+  <h2>📲 Eclair Node (REST API)</h2>
+  <pre><code># List funds and channels
+curl -s localhost:8080/channel | jq
+
+# Get pubkey and node info
+curl -s localhost:8080/getinfo | jq -r '.nodeId'
+
+# Create invoice
+curl -X POST localhost:8080/createinvoice -d '{"amountMsat":100000,"description":"Test"}' | jq -r '.serialized'
+
+# Pay invoice
+curl -X POST localhost:8080/payinvoice -d '{"invoice":"&lt;BOLT11_STRING&gt;"}'</code></pre>
+
+  <hr>
+  <h2>🛠 Debug / Network Management</h2>
+  <pre><code># LND node info
+lncli getinfo
+
+# CLN node info
+lightning-cli getinfo
+
+# Eclair node info
+curl -s localhost:8080/getinfo | jq
+
+# Mine blocks (simulate confirmations)
+bitcoin-cli -regtest generatetoaddress 6 $(bitcoin-cli -regtest getnewaddress)</code></pre>
+
+  <hr>
+  <p>Use this cheat sheet alongside the full lab guide to quickly reference key commands during hands-on activities.</p>
+  <p><strong>Happy hacking ⚡</strong></p>
+</body>
+</html>
