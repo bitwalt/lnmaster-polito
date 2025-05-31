@@ -5,7 +5,7 @@ This repository contains educational materials and hands-on exercises for learni
 ## 📚 Repository Contents
 
 ### Core Materials
-- **[`exercises.html`](exercises.html)** - Step-by-step Lightning Network exercises covering:
+- **[`exercises.md`](exercises.md)** - Step-by-step Lightning Network exercises covering:
   - Channel setup and management
   - BOLT11 payments
   - BOLT12 offers
@@ -13,7 +13,7 @@ This repository contains educational materials and hands-on exercises for learni
   - Network graph exploration
   - Automation scripting
 
-- **[`cheatsheet.html`](cheatsheet.html)** - Quick reference guide with CLI commands for:
+- **[`cheatsheet.md`](cheatsheet.md)** - Quick reference guide with CLI commands for:
   - Bitcoin Core (regtest funding)
   - LND (`lncli` commands)
   - Core Lightning (`lightning-cli` commands)
@@ -54,10 +54,10 @@ This repository contains educational materials and hands-on exercises for learni
 3. **Open the course materials**
    ```bash
    # Open exercises in your browser
-   open exercises.html
+   open exercises.md
    
    # Open cheatsheet for reference
-   open cheatsheet.html
+   open cheatsheet.md
    ```
 
 4. **Set up your first Polar network**
@@ -124,7 +124,7 @@ lightning-cli invoice 100000 "label" "description"
 lncli payinvoice <bolt11_string>
 ```
 
-For complete command reference, see [`cheatsheet.html`](cheatsheet.html).
+For complete command reference, see [`cheatsheet.md`](cheatsheet.md).
 
 ## 🎓 Educational Goals
 
